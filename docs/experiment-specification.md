@@ -71,6 +71,8 @@ $$
 
 We round up to **n = 20 trials per variant** to add margin for the guardrail metric (which has a tighter MDE) and to absorb any single-trial outlier.
 
+After the warm-up rule in §9 discards the first 2 trials per variant as cold-start, the **effective analyzed sample is n = 18 per variant** (36 total trials, 3,600 request observations). The original n = 20 power calculation already includes margin for this — required n was 16 — so power remains ≥ 0.80 to detect a +15% throughput effect at α = 0.025 (Bonferroni-corrected).
+
 **Each trial sends 100 requests at concurrency 4**, so the full experiment delivers 40 trials × 100 = 4,000 simulated request observations.
 
 ## 7. Stopping rule and multiple-comparison handling

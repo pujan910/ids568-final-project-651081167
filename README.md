@@ -67,7 +67,8 @@ ids568-final-project-651081167/
 ├── dashboards/
 │   ├── prometheus.yml             # Prometheus scrape config
 │   ├── alert_rules.yml            # 6 alert rules
-│   └── metrics_snapshot.txt       # /metrics export from a live run
+│  - grafana-dashboard.json     # Importable Grafana dashboard (6 panels)
+    └── metrics_snapshot.txt       # /metrics export from a live run
 ├── logs/
 │   └── audit-trail.json           # Structured audit log (C3)
 ├── visualizations/

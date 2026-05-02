@@ -7,6 +7,9 @@
 **Reproducibility:** All scripts deterministic with `seed=42`. Reference and production CSVs are checked in under `src/drift/data/`.
 
 ---
+## Scope note: label distribution drift is not applicable
+
+The Component 4 brief asks for label distribution drift "if available." This service is a **generative LLM inference endpoint with no ground-truth labels** — there is no classification target, no regression target, and no human-labeled correctness signal collected at request time. Standard label drift therefore does not apply. The closest analogues are tracked instead: response-length distribution drift (a proxy for output-shape change), latency drift (a proxy for cost regression), and cache hit rate (a proxy for prompt-pattern change). All three are evaluated below.
 
 ## Headline finding
 
