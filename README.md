@@ -210,4 +210,4 @@ This project is the capstone of an arc that started in Milestone 1 (FastAPI serv
 ## Acknowledgments
 
 - The OPT-125m model is © Meta AI, released under the OPT-175B License Agreement.
-- Built on the IDS568 Milestone 5 codebase (`ids568-milestone5-pshah`).
+- Built on the IDS568 Milestone 5 codebase
