@@ -1,0 +1,66 @@
+# Alert rules for the LLM Inference Server.
+# These would fire to PagerDuty / Slack in a production setup.
+
+groups:
+  - name: llm_inference_alerts
+    interval: 30s
+    rules:
+
+      # ----- Latency SLO breaches -----
+      - alert: HighColdLatency
+        expr: histogram_quantile(0.95, sum(rate(llm_request_latency_seconds_bucket{cached="false"}[5m])) by (le)) > 5
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Cold-cache p95 latency above 5s"
+          description: "Inference latency for non-cached requests has exceeded 5s for 2 minutes. The model server may be saturated or batching may be backlogged."
+
+      - alert: CriticalColdLatency
+        expr: histogram_quantile(0.99, sum(rate(llm_request_latency_seconds_bucket{cached="false"}[5m])) by (le)) > 10
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Cold-cache p99 latency above 10s — SLO breach"
+          description: "p99 latency exceeded 10s. Customer-facing requests are timing out."
+
+      # ----- Error rate -----
+      - alert: ElevatedErrorRate
+        expr: sum(rate(llm_requests_total{status="error"}[5m])) / sum(rate(llm_requests_total[5m])) > 0.01
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Error rate above 1%"
+          description: "More than 1% of requests have errored over the last 5 minutes."
+
+      # ----- Cache health (drift / pattern shift signal) -----
+      - alert: CacheHitRateDropped
+        expr: sum(rate(llm_cache_hits_total[10m])) / (sum(rate(llm_cache_hits_total[10m])) + sum(rate(llm_cache_misses_total[10m]))) < 0.30
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Cache hit rate below 30% — possible prompt drift"
+          description: "Sustained drop in cache hit rate indicates the input prompt distribution has shifted. Investigate drift dashboards (Component 4)."
+
+      # ----- Prompt-length drift (input integrity) -----
+      - alert: PromptLengthDrift
+        expr: histogram_quantile(0.95, sum(rate(llm_prompt_length_chars_bucket[10m])) by (le)) > 800
+        for: 10m
+        labels:
+          severity: info
+        annotations:
+          summary: "Prompt p95 length exceeds 800 characters"
+          description: "Incoming prompts have grown unusually long, which inflates inference cost and may indicate misuse or a client-side bug."
+
+      # ----- Resource saturation -----
+      - alert: HighMemoryUsage
+        expr: llm_memory_percent > 90
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Host memory above 90%"
+          description: "Memory pressure could trigger OOM kills of the inference process."

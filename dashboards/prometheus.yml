@@ -1,0 +1,21 @@
+# Prometheus scrape configuration for the LLM Inference Server.
+# To run a live Prometheus instance:
+#   docker run -p 9090:9090 -v $(pwd)/dashboards/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+# Then query at http://localhost:9090 against this server's /metrics endpoint.
+
+global:
+  scrape_interval: 15s        # Pull metrics every 15 seconds
+  evaluation_interval: 15s    # Evaluate alert rules every 15 seconds
+
+rule_files:
+  - "alert_rules.yml"
+
+scrape_configs:
+  - job_name: "llm-inference-server"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["host.docker.internal:8000"]
+        labels:
+          service: "llm-inference"
+          model: "facebook/opt-125m"
+          environment: "dev"

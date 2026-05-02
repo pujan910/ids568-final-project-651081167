@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.0",
+  "service": "llm-inference-server",
+  "owner": "pujan910",
+  "events": [
+    {
+      "event_id": "EVT-001",
+      "timestamp": "2026-04-01T14:22:00-05:00",
+      "type": "MODEL_REGISTERED",
+      "actor": "pujan910",
+      "details": {
+        "model_name": "facebook/opt-125m",
+        "source": "huggingface_hub",
+        "checkpoint_sha256": "inherited_from_hf",
+        "license": "OPT-175B License Agreement (research-only)"
+      },
+      "approval": {
+        "status": "approved",
+        "reviewer": "course_staff",
+        "rationale": "Approved for IDS568 academic deployment (research-only). Production use prohibited per Model Card §2."
+      }
+    },
+    {
+      "event_id": "EVT-002",
+      "timestamp": "2026-04-05T09:10:00-05:00",
+      "type": "DEPLOYMENT_CONFIG_SET",
+      "actor": "pujan910",
+      "details": {
+        "max_batch_size": 4,
+        "batch_timeout_ms": 20,
+        "cache_backend": "memory",
+        "cache_ttl_seconds": 300,
+        "cache_max_entries": 1000,
+        "service_version": "v1.0.0"
+      },
+      "linked_artifact": "src/config.py"
+    },
+    {
+      "event_id": "EVT-003",
+      "timestamp": "2026-04-12T16:45:00-05:00",
+      "type": "MILESTONE_5_SUBMISSION",
+      "actor": "pujan910",
+      "details": {
+        "milestone": "M5 - LLM Inference Optimization",
+        "git_tag": "submission",
+        "repo": "ids568-milestone5-pshah",
+        "score": "10/10"
+      }
+    },
+    {
+      "event_id": "EVT-004",
+      "timestamp": "2026-05-01T22:07:00-05:00",
+      "type": "MONITORING_INSTRUMENTATION_ADDED",
+      "actor": "pujan910",
+      "details": {
+        "library": "prometheus-client==0.21.0",
+        "metrics_added": [
+          "llm_request_latency_seconds",
+          "llm_requests_total",
+          "llm_cache_hits_total",
+          "llm_cache_misses_total",
+          "llm_batch_size",
+          "llm_prompt_length_chars",
+          "llm_response_length_chars",
+          "llm_active_requests",
+          "llm_cpu_percent",
+          "llm_memory_percent"
+        ],
+        "endpoint": "/metrics"
+      },
+      "linked_artifact": "src/monitoring/metrics.py"
+    },
+    {
+      "event_id": "EVT-005",
+      "timestamp": "2026-05-01T22:13:00-05:00",
+      "type": "MONITORING_RUN_OBSERVED",
+      "actor": "pujan910",
+      "details": {
+        "run_type": "synthetic_load_test",
+        "total_requests": 200,
+        "concurrency": 8,
+        "successes": 200,
+        "errors": 0,
+        "throughput_rps": 9.7,
+        "latency_p50_ms": 0.6,
+        "latency_p95_ms": 3852.1,
+        "latency_p99_ms": 3974.0,
+        "cache_hit_rate": 0.781
+      },
+      "linked_artifact": "dashboards/metrics_snapshot.txt"
+    },
+    {
+      "event_id": "EVT-006",
+      "timestamp": "2026-05-01T22:18:00-05:00",
+      "type": "ALERT_RULES_PUBLISHED",
+      "actor": "pujan910",
+      "details": {
+        "rule_count": 6,
+        "rules": [
+          "HighColdLatency",
+          "CriticalColdLatency",
+          "ElevatedErrorRate",
+          "CacheHitRateDropped",
+          "PromptLengthDrift",
+          "HighMemoryUsage"
+        ]
+      },
+      "linked_artifact": "dashboards/alert_rules.yml"
+    },
+    {
+      "event_id": "EVT-007",
+      "timestamp": "2026-05-01T22:22:00-05:00",
+      "type": "AB_TEST_EXECUTED",
+      "actor": "pujan910",
+      "details": {
+        "experiment_id": "batching-v1",
+        "variant_a": {"max_batch_size": 4, "batch_timeout_ms": 20},
+        "variant_b": {"max_batch_size": 8, "batch_timeout_ms": 50},
+        "trials_per_variant": 20,
+        "warmup_discarded": 2,
+        "requests_per_trial": 100,
+        "primary_metric": "throughput_rps",
+        "guardrail_metric": "p99_latency_ms",
+        "test": "Welch t-test, two-sided, Bonferroni-corrected α=0.025",
+        "result": {
+          "throughput_p_value": 0.36,
+          "throughput_relative_change_pct": -2.1,
+          "p99_relative_change_pct": 2.1,
+          "guardrail_breached": false
+        },
+        "decision": "RUN_MORE_DATA",
+        "rationale": "Throughput difference not statistically significant (p=0.36 > 0.025). Variant A retained as production default."
+      },
+      "approval": {
+        "status": "no_change_required",
+        "reviewer": "ml_platform",
+        "rationale": "No production change made; existing config retained."
+      },
+      "linked_artifact": "src/ab_test/results.json"
+    },
+    {
+      "event_id": "EVT-008",
+      "timestamp": "2026-05-01T22:25:00-05:00",
+      "type": "MODEL_CARD_PUBLISHED",
+      "actor": "pujan910",
+      "details": {
+        "version": "v1.0.0",
+        "linked_artifacts": [
+          "docs/model-card.md",
+          "docs/lineage-diagram.png",
+          "docs/risk-register.md"
+        ]
+      },
+      "approval": {
+        "status": "approved",
+        "reviewer": "course_staff",
+        "rationale": "Final Project Component 3 deliverable."
+      }
+    },
+    {
+      "event_id": "EVT-009",
+      "timestamp": "2026-05-01T22:30:00-05:00",
+      "type": "INTERVENTION_PLACEHOLDER",
+      "actor": "system",
+      "details": {
+        "description": "Reserved entry for first production drift intervention. When a drift signal from Component 4 crosses its threshold and triggers a re-evaluation of the deployed model, the resulting actions (retraining, prompt adjustment, model swap) will be appended here as new events of type DRIFT_REMEDIATION_INITIATED."
+      }
+    }
+  ]
+}

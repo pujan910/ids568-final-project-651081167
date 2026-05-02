@@ -1,0 +1,107 @@
+{
+  "settings": {
+    "reference_path": "src/drift/data/reference.csv",
+    "production_path": "src/drift/data/production.csv",
+    "psi_thresholds": {
+      "stable": 0.1,
+      "moderate": 0.25
+    },
+    "ks_significance_level": 0.001,
+    "outlier_z_threshold": 3.0
+  },
+  "features": [
+    {
+      "feature": "prompt_length_chars",
+      "type": "numeric",
+      "ref_mean": 44.53,
+      "ref_std": 23.53,
+      "prod_mean": 197.95,
+      "prod_std": 577.69,
+      "mean_shift_pct": 344.55,
+      "psi": 1.5907,
+      "psi_label": "significant_drift",
+      "ks_statistic": 0.541,
+      "ks_p_value": 1.5860009962863472e-134,
+      "ks_significant_at_001": true,
+      "outliers": {
+        "outlier_rate": 0.322,
+        "outlier_count": 322,
+        "n": 1000,
+        "z_threshold": 3.0
+      }
+    },
+    {
+      "feature": "prompt_token_count",
+      "type": "numeric",
+      "ref_mean": 10.76,
+      "ref_std": 5.89,
+      "prod_mean": 49.11,
+      "prod_std": 144.43,
+      "mean_shift_pct": 356.61,
+      "psi": 1.5865,
+      "psi_label": "significant_drift",
+      "ks_statistic": 0.541,
+      "ks_p_value": 1.5860009962863472e-134,
+      "ks_significant_at_001": true,
+      "outliers": {
+        "outlier_rate": 0.322,
+        "outlier_count": 322,
+        "n": 1000,
+        "z_threshold": 3.0
+      }
+    },
+    {
+      "feature": "response_length_chars",
+      "type": "numeric",
+      "ref_mean": 90.17,
+      "ref_std": 20.23,
+      "prod_mean": 138.09,
+      "prod_std": 136.66,
+      "mean_shift_pct": 53.15,
+      "psi": 0.9935,
+      "psi_label": "significant_drift",
+      "ks_statistic": 0.378,
+      "ks_p_value": 5.145848984405932e-64,
+      "ks_significant_at_001": true,
+      "outliers": {
+        "outlier_rate": 0.248,
+        "outlier_count": 248,
+        "n": 1000,
+        "z_threshold": 3.0
+      }
+    },
+    {
+      "feature": "latency_ms",
+      "type": "numeric",
+      "ref_mean": 826.0,
+      "ref_std": 1475.64,
+      "prod_mean": 2081.69,
+      "prod_std": 1853.75,
+      "mean_shift_pct": 152.02,
+      "psi": 0.5234,
+      "psi_label": "significant_drift",
+      "ks_statistic": 0.332,
+      "ks_p_value": 3.4361829016674145e-49,
+      "ks_significant_at_001": true,
+      "outliers": {
+        "outlier_rate": 0.0,
+        "outlier_count": 0,
+        "n": 1000,
+        "z_threshold": 3.0
+      }
+    },
+    {
+      "feature": "cache_hit",
+      "type": "binary",
+      "ref_rate": 0.769,
+      "prod_rate": 0.438,
+      "absolute_difference": -0.331,
+      "relative_change_pct": -43.04,
+      "psi": 0.4806,
+      "psi_label": "significant_drift",
+      "z_statistic": -15.1305,
+      "p_value": 0.0,
+      "significant_at_001": true
+    }
+  ]
+}

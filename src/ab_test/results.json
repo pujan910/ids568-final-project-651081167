@@ -1,0 +1,51 @@
+{
+  "settings": {
+    "trials_per_variant": 20,
+    "warmup_discarded": 2,
+    "requests_per_trial": 100,
+    "alpha": 0.05,
+    "n_tests": 2,
+    "alpha_bonferroni_corrected": 0.025,
+    "seed": 42
+  },
+  "summary": {
+    "A": {
+      "throughput_mean_rps": 3.724,
+      "throughput_std_rps": 0.267,
+      "p50_latency_ms": 6032.3,
+      "p95_latency_ms": 24457.7,
+      "p99_latency_ms": 26096.4
+    },
+    "B": {
+      "throughput_mean_rps": 3.646,
+      "throughput_std_rps": 0.239,
+      "p50_latency_ms": 6526.3,
+      "p95_latency_ms": 25017.5,
+      "p99_latency_ms": 26648.6
+    }
+  },
+  "primary_test_throughput": {
+    "test": "Welch's two-sample t-test, two-sided",
+    "t_statistic": -0.9241,
+    "p_value": 0.362032,
+    "p_value_threshold_bonferroni": 0.025,
+    "significant": false,
+    "mean_difference_rps": -0.078,
+    "relative_change_pct": -2.1,
+    "ci_95_difference_rps": [
+      -0.276,
+      0.12
+    ]
+  },
+  "guardrail_test_p99_latency": {
+    "test": "Welch's two-sample t-test, two-sided",
+    "t_statistic": 0.8643,
+    "p_value": 0.393466,
+    "mean_difference_ms": 552.2,
+    "relative_change_pct": 2.12,
+    "regressed_beyond_guardrail": false,
+    "guardrail_threshold_pct": 25.0
+  },
+  "decision": "RUN MORE DATA",
+  "rationale": "Throughput difference is not statistically significant (p=0.3620 > \u03b1=0.025)."
+}

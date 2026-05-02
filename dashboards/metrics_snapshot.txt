@@ -1,0 +1,122 @@
+# HELP python_gc_objects_collected_total Objects collected during gc
+# TYPE python_gc_objects_collected_total counter
+python_gc_objects_collected_total{generation="0"} 4355.0
+python_gc_objects_collected_total{generation="1"} 5077.0
+python_gc_objects_collected_total{generation="2"} 123.0
+# HELP python_gc_objects_uncollectable_total Uncollectable objects found during GC
+# TYPE python_gc_objects_uncollectable_total counter
+python_gc_objects_uncollectable_total{generation="0"} 0.0
+python_gc_objects_uncollectable_total{generation="1"} 0.0
+python_gc_objects_uncollectable_total{generation="2"} 0.0
+# HELP python_gc_collections_total Number of times this generation was collected
+# TYPE python_gc_collections_total counter
+python_gc_collections_total{generation="0"} 961.0
+python_gc_collections_total{generation="1"} 87.0
+python_gc_collections_total{generation="2"} 6.0
+# HELP python_info Python platform information
+# TYPE python_info gauge
+python_info{implementation="CPython",major="3",minor="11",patchlevel="4",version="3.11.4"} 1.0
+# HELP llm_request_latency_seconds End-to-end latency of /generate requests (seconds)
+# TYPE llm_request_latency_seconds histogram
+llm_request_latency_seconds_bucket{cached="false",le="0.05"} 0.0
+llm_request_latency_seconds_bucket{cached="false",le="0.1"} 0.0
+llm_request_latency_seconds_bucket{cached="false",le="0.25"} 0.0
+llm_request_latency_seconds_bucket{cached="false",le="0.5"} 0.0
+llm_request_latency_seconds_bucket{cached="false",le="1.0"} 0.0
+llm_request_latency_seconds_bucket{cached="false",le="2.0"} 4.0
+llm_request_latency_seconds_bucket{cached="false",le="5.0"} 44.0
+llm_request_latency_seconds_bucket{cached="false",le="10.0"} 44.0
+llm_request_latency_seconds_bucket{cached="false",le="+Inf"} 44.0
+llm_request_latency_seconds_count{cached="false"} 44.0
+llm_request_latency_seconds_sum{cached="false"} 154.78790640830994
+llm_request_latency_seconds_bucket{cached="true",le="0.05"} 157.0
+llm_request_latency_seconds_bucket{cached="true",le="0.1"} 157.0
+llm_request_latency_seconds_bucket{cached="true",le="0.25"} 157.0
+llm_request_latency_seconds_bucket{cached="true",le="0.5"} 157.0
+llm_request_latency_seconds_bucket{cached="true",le="1.0"} 157.0
+llm_request_latency_seconds_bucket{cached="true",le="2.0"} 157.0
+llm_request_latency_seconds_bucket{cached="true",le="5.0"} 157.0
+llm_request_latency_seconds_bucket{cached="true",le="10.0"} 157.0
+llm_request_latency_seconds_bucket{cached="true",le="+Inf"} 157.0
+llm_request_latency_seconds_count{cached="true"} 157.0
+llm_request_latency_seconds_sum{cached="true"} 0.0016634464263916016
+# HELP llm_request_latency_seconds_created End-to-end latency of /generate requests (seconds)
+# TYPE llm_request_latency_seconds_created gauge
+llm_request_latency_seconds_created{cached="false"} 1.777691313198373e+09
+llm_request_latency_seconds_created{cached="true"} 1.777691573033799e+09
+# HELP llm_requests_total Total /generate requests received
+# TYPE llm_requests_total counter
+llm_requests_total{status="success"} 201.0
+# HELP llm_requests_created Total /generate requests received
+# TYPE llm_requests_created gauge
+llm_requests_created{status="success"} 1.777691313198601e+09
+# HELP llm_cache_hits_total Total cache hits
+# TYPE llm_cache_hits_total counter
+llm_cache_hits_total 157.0
+# HELP llm_cache_hits_created Total cache hits
+# TYPE llm_cache_hits_created gauge
+llm_cache_hits_created 1.777691274272372e+09
+# HELP llm_cache_misses_total Total cache misses
+# TYPE llm_cache_misses_total counter
+llm_cache_misses_total 44.0
+# HELP llm_cache_misses_created Total cache misses
+# TYPE llm_cache_misses_created gauge
+llm_cache_misses_created 1.777691274272377e+09
+# HELP llm_batch_size Number of requests grouped per inference batch
+# TYPE llm_batch_size histogram
+llm_batch_size_bucket{le="1.0"} 1.0
+llm_batch_size_bucket{le="2.0"} 1.0
+llm_batch_size_bucket{le="3.0"} 7.0
+llm_batch_size_bucket{le="4.0"} 7.0
+llm_batch_size_bucket{le="5.0"} 12.0
+llm_batch_size_bucket{le="6.0"} 12.0
+llm_batch_size_bucket{le="7.0"} 12.0
+llm_batch_size_bucket{le="8.0"} 12.0
+llm_batch_size_bucket{le="16.0"} 12.0
+llm_batch_size_bucket{le="+Inf"} 12.0
+llm_batch_size_count 12.0
+llm_batch_size_sum 44.0
+# HELP llm_batch_size_created Number of requests grouped per inference batch
+# TYPE llm_batch_size_created gauge
+llm_batch_size_created 1.777691274272384e+09
+# HELP llm_prompt_length_chars Character length of incoming prompts (drift signal)
+# TYPE llm_prompt_length_chars histogram
+llm_prompt_length_chars_bucket{le="10.0"} 0.0
+llm_prompt_length_chars_bucket{le="25.0"} 39.0
+llm_prompt_length_chars_bucket{le="50.0"} 190.0
+llm_prompt_length_chars_bucket{le="100.0"} 201.0
+llm_prompt_length_chars_bucket{le="200.0"} 201.0
+llm_prompt_length_chars_bucket{le="400.0"} 201.0
+llm_prompt_length_chars_bucket{le="800.0"} 201.0
+llm_prompt_length_chars_bucket{le="1600.0"} 201.0
+llm_prompt_length_chars_bucket{le="+Inf"} 201.0
+llm_prompt_length_chars_count 201.0
+llm_prompt_length_chars_sum 6847.0
+# HELP llm_prompt_length_chars_created Character length of incoming prompts (drift signal)
+# TYPE llm_prompt_length_chars_created gauge
+llm_prompt_length_chars_created 1.777691274272407e+09
+# HELP llm_response_length_chars Character length of generated responses (drift signal)
+# TYPE llm_response_length_chars histogram
+llm_response_length_chars_bucket{le="10.0"} 0.0
+llm_response_length_chars_bucket{le="25.0"} 0.0
+llm_response_length_chars_bucket{le="50.0"} 0.0
+llm_response_length_chars_bucket{le="100.0"} 14.0
+llm_response_length_chars_bucket{le="200.0"} 187.0
+llm_response_length_chars_bucket{le="400.0"} 201.0
+llm_response_length_chars_bucket{le="800.0"} 201.0
+llm_response_length_chars_bucket{le="1600.0"} 201.0
+llm_response_length_chars_bucket{le="+Inf"} 201.0
+llm_response_length_chars_count 201.0
+llm_response_length_chars_sum 29595.0
+# HELP llm_response_length_chars_created Character length of generated responses (drift signal)
+# TYPE llm_response_length_chars_created gauge
+llm_response_length_chars_created 1.777691274272417e+09
+# HELP llm_active_requests Number of requests currently in-flight
+# TYPE llm_active_requests gauge
+llm_active_requests 0.0
+# HELP llm_cpu_percent Process CPU utilization percent
+# TYPE llm_cpu_percent gauge
+llm_cpu_percent 55.4
+# HELP llm_memory_percent Host memory utilization percent
+# TYPE llm_memory_percent gauge
+llm_memory_percent 82.5
